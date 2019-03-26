@@ -48,6 +48,8 @@
         "Standard_NC6",
         "Standard_NC12",
         "Standard_NC24",
+        "Standard_HC44rs",
+        "Standard_HB60rs",
         "Standard_NC24r"
       ],
       "metadata": {
@@ -320,23 +322,7 @@
               }
             }
           },
-          "extensionProfile": {
-            "extensions": [
-              {
-                "name": "PostInstallScript",
-                "properties": {
-                  "publisher": "Microsoft.Azure.Extensions",
-                  "type": "CustomScript",
-                  "typeHandlerVersion": "2.0",
-                  "autoUpgradeMinorVersion": true,
-                  "settings": {
-                    "fileUris": "[variables('vmScripts').scriptsToDownload]",
-                    "commandToExecute": "[variables('vmScripts').commandToExecute]"
-                  }
-                }
-              }
-            ]
-          }
+          
         }
       }
     }
