@@ -67,18 +67,6 @@
         "description": "select whether to install from a custom or stock image"
       }
     },
-    "LoginVMsku": {
-      "type": "string",
-      "defaultValue": "Standard_F8",
-      "allowedValues": [
-        "Standard_F4",
-        "Standard_F8",
-        "Standard_F16"
-      ],
-      "metadata": {
-        "description": "sku to use for the NIS Server VM"
-      }
-    },
     "imageResourceGroup": {
       "type": "string",
       "defaultValue": "",
@@ -98,7 +86,7 @@
       "metadata": {
         "description": "Number of VM instances for Compute Node Scaleset (100 or less)."
       },
-      "defaultValue": 64,
+      "defaultValue": 2,
       "maxValue": 100
     },
     "adminUserName": {
@@ -230,43 +218,6 @@
             }
           }
         ]
-      }
-    },
-    {
-      "type": "Microsoft.Compute/virtualMachines",
-      "name": "[variables('LoginName')]",
-      "location": "[variables('location')]",
-      "apiVersion": "2017-03-30",
-      "dependsOn": [
-        "[concat('Microsoft.Network/networkinterfaces/', variables('LoginNicName'))]"
-      ],
-      "properties": {
-        "hardwareProfile": {
-          "vmSize": "[parameters('LoginVMsku')]"
-        },
-        "osProfile": {
-          "computerName": "[variables('LoginName')]",
-          "adminUsername": "[parameters('adminUserName')]",
-          "adminPassword": "[parameters('adminPassword')]",
-          "linuxConfiguration": "[variables('linuxConfiguration')]"
-        },
-        "storageProfile": {
-          "imageReference": "[variables('computeNodeimageReference')]",
-          "osDisk": {
-            "caching": "ReadOnly",
-            "createOption": "FromImage",
-             "managedDisk": {
-                "storageAccountType": "Standard_LRS"
-             }
-          }
-        },
-        "networkProfile": {
-          "networkInterfaces": [
-            {
-               "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('LoginNicName'))]"
-            }
-          ]
-        }
       }
     },
     {
